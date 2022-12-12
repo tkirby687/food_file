@@ -10,6 +10,7 @@
     flex-direction: column;  
     align-items: center;
     background-image: url('../img/add_item_pic.jpg');
+    background-size: cover;
   }
   
   #content {
@@ -28,6 +29,9 @@
     padding: 30px;
     background-image: url('../img/banner_pic.jpg');
     font-weight: bold;
+    color: white;
+    background-size: cover;
+    width: 100%;
   }
 
   .left {

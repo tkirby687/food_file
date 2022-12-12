@@ -8,12 +8,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    border: 2px solid black;
+    justify-content: flex-start;    
     margin-bottom: 50px;
     background-image: url('../img/view_item_pic.jpg');
     margin: 0 auto;
     font-weight: bold;
+    background-size: cover;
+    color: #007BFF;
 }
 
 h1 {
@@ -37,7 +38,11 @@ p {
 .banner {
   display: flex;
   justify-content: space-around;
-  padding: 30px;    
+  padding: 30px;
+  background-image: url('../img/banner_pic.jpg');
+  background-size: cover;
+  height: 100px;
+  
 }
 
 .left {

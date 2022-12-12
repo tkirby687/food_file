@@ -5,16 +5,17 @@
 }
 .container {
   margin: 0 auto;
-  height: 95vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   background-image: url('../img/dashboard_pic.jpg');
+  background-size: cover;
 }
 
 .header {
-    background-color: black;
+    background-color: #007BFF;
     color: white;
 }
 
@@ -25,10 +26,11 @@ table {
     width: 75%;
     margin-top: 50px;
     font-weight: bold;
+    color: white;
   }
   
   td, th {
-    border: 1px solid black;
+    border: 1px solid #007BFF;
     text-align: left;
     padding: 8px;
   }
@@ -38,7 +40,10 @@ table {
     justify-content: space-around;
     padding: 30px;
     background-image: url('../img/banner_pic.jpg');
-    color: black;
+    color: white;
+    background-size: cover;
+    height: 100px;
+    width: 100%;
   }
 
   .left {

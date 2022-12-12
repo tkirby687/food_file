@@ -20,12 +20,12 @@
         </div>
         <div class="right">
             <div class="links" >
-                <a href="/item/add_item" style="color: black">+ Add Item</a>
-                <a href="/logout" style="color: black">Logout</a>
+                <a href="/item/add_item" style="color: white">+ Add Item</a>
+                <a href="/logout" style="color: white">Logout</a>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class=" container">
         <table>
             <thead class="header">
                 <tr>
@@ -43,14 +43,14 @@
                         <td class="center">{{item.date_requested.strftime(date)}}</td>
                         {% if item.user_id == session.user_id %}
                         <td class="center">
-                            <a href="/item/{{item.id}}" style="color: black">View</a>
-                            <a href="/item/edit_item/{{item.id}}" style="color: black">Edit</a>
-                            <a href="/item/delete_item/{{item.id}}" style="color: black">Delete</a>
+                            <a href="/item/{{item.id}}" style="color: white">View</a>
+                            <a href="/item/edit_item/{{item.id}}" style="color: white">Edit</a>
+                            <a href="/item/delete_item/{{item.id}}" style="color: white">Delete</a>
                         </td>
                         {% endif %}
                         {% if item.user_id != session.user_id %}
                         <td class="center">
-                            <a href="/item/{{item.id}}" style="color: black">View</a>
+                            <a href="/item/{{item.id}}" style="color: white">View</a>
                         </td>
                         {% endif %}
                     </tr>
@@ -58,7 +58,7 @@
             </tbody>
         </table>
         <div>
-            <a href="/item/delete_all" id="button" class="btn btn-dark">Reset List</a>
+            <a href="/item/delete_all" id="button" class="btn btn-primary" >Reset List</a>
         </div>
     </div>
 </body>

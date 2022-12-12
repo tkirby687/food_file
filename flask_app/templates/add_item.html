@@ -11,20 +11,22 @@
 
     <title>Add Show</title> 
 <body>
-    <div class="banner">
-      <div class="left">
-          
-          <h2>Add a new Item:</h2>
-      </div>
-      <div class="right">
-          
-          <div class="links">
-              <a href="/dashboard" style="color: black">Back to Dashboard</a>
-              <a href="/logout" style="color: black">Logout</a>
-          </div>
-      </div>
+  <div class="banner">
+    <div class="left">
+        
+        <h2>Add a new Item:</h2>
     </div>
+    <div class="right">
+        
+        <div class="links">
+            <a href="/dashboard" style="color: white">Back to Dashboard</a>
+            <a href="/logout" style="color: white">Logout</a>
+        </div>
+    </div>
+  </div>
+    
     <div class="container">
+      
       <div id="left-content">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -53,7 +55,7 @@
             <input type="number"  name="qty" class="form-control" id="qty" rows="10">
           </div>          
           <div class="col-12">
-            <button type="submit" class="btn btn-dark">Add Item</button>
+            <button type="submit" class="btn btn-primary">Add Item</button>
           </div>
         </form>
       </div>
