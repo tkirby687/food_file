@@ -16,12 +16,14 @@
     <div class="banner">
         <div class="left">
             <h1>Welcome, {{user.first_name}}</h1>
-            <h2>All Items Needed:</h2>
+            <h2>Events for today:</h2>
         </div>
         <div class="right">
             <div class="links" >
-                <a href="/item/add_item" style="color: white">+ Add Item</a>
-                <a href="/logout" style="color: white">Logout</a>
+                <a href="/event/add_event" style="color: black">+ Add Event</a>
+                <a href="/event/search_event" style="color: black">Search Event</a>
+                <a href="/user/account/" style="color: black">Account Info</a>
+                <a href="/logout" style="color: black">Logout</a>
             </div>
         </div>
     </div>
@@ -29,37 +31,79 @@
         <table>
             <thead class="header">
                 <tr>
-                    <th class="center">Item</th>
-                    <th class="center">Quantity</th>
-                    <th class="center">Date Requested</th>
-                    <th class="center">Actions</th>
+                    <th class="center">Event Type</th>
+                    <th class="center">Location</th>
+                    <th class="center">Spots Available</th>
+                    <th class="center">Event Time</th>
+                    <th class="center">Event Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td class="center">{{item.name}}</td>
-                        <td class="center">{{item.qty}}</td>
-                        <td class="center">{{item.date_requested.strftime(date)}}</td>
-                        {% if item.user_id == session.user_id %}
-                        <td class="center">
-                            <a href="/item/{{item.id}}" style="color: white">View</a>
-                            <a href="/item/edit_item/{{item.id}}" style="color: white">Edit</a>
-                            <a href="/item/delete_item/{{item.id}}" style="color: white">Delete</a>
-                        </td>
-                        {% endif %}
-                        {% if item.user_id != session.user_id %}
-                        <td class="center">
-                            <a href="/item/{{item.id}}" style="color: white">View</a>
-                        </td>
-                        {% endif %}
-                    </tr>
+                {% for event in events %}
+                    {% if today.strftime(date) == event.event_date.strftime(date)%}
+                        <tr>
+                            <td class="center">
+                                <a href="/event/map_event/{{event.id}}" style="color: black">{{event.event_type}}</a>
+                            </td>
+                            <td class="center">{{event.location}}</td>
+                            <td class="center">{{event.spots_open}}</td>
+                            <td class="center">{{event.event_time}}</td>
+                            {% if event.user_id == session.user_id %}
+                            <td class="center">
+                                <a href="/event/{{event.id}}" style="color: black">View</a>
+                                <a href="/event/edit_event/{{event.id}}" style="color: black">Edit</a>
+                                <a href="/event/delete_event/{{event.id}}" style="color: black">Delete</a>
+                            </td>
+                            {% endif %}
+                            {% if event.user_id != session.user_id %}
+                            <td class="center">
+                                <a href="/event/{{event.id}}" style="color: black" >View</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>
-        <div>
-            <a href="/item/delete_all" id="button" class="btn btn-primary" >Reset List</a>
-        </div>
+        <table>
+            <thead class="header">
+                <tr>
+                    <th class="center">Event Type</th>
+                    <th class="center">Location</th>
+                    <th class="center">Spots Available</th>
+                    <th class="center">Event Date</th>
+                    <th class="center">Event Time</th>
+                    <th class="center">Event Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    {% if today.strftime(date) != event.event_date.strftime(date)%}
+                        <tr>
+                            <td class="center">
+                                <a href="/event/map_event/{{event.id}}" style="color: black">{{event.event_type}}</a>
+                            </td>
+                            <td class="center">{{event.location}}</td>
+                            <td class="center">{{event.spots_open}}</td>
+                            <td class="center">{{event.event_date.strftime(date)}}</td>
+                            <td class="center">{{event.event_time}}</td>
+                            {% if event.user_id == session.user_id %}
+                            <td class="center">
+                                <a href="/event/{{event.id}}" style="color: black">View</a>
+                                <a href="/event/edit_event/{{event.id}}" style="color: black">Edit</a>
+                                <a href="/event/delete_event/{{event.id}}" style="color: black">Delete</a>
+                            </td>
+                            {% endif %}
+                            {% if event.user_id != session.user_id %}
+                            <td class="center">
+                                <a href="/event/{{event.id}}" style="color: black" >View</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

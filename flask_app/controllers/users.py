@@ -1,11 +1,21 @@
 from flask import  render_template, request, redirect, session, flash
 from flask_app import app
 from flask_app.models.user import User
-from flask_app.models.item import Item
+from flask_app.models.event import Event
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from datetime import datetime
+from datetime import date
 dateFormat = "%m/%d/%Y"
+
+@app.route('/user/account/')
+def account_info():
+    data = {
+        'id' : session['user_id']
+    }
+    return render_template('user_account.html', user = User.get_by_id(data))
+
+           
 
 @app.route('/')
 def index():
@@ -56,7 +66,7 @@ def dashboard():
         'id' : session['user_id']
     }
     
-    return render_template("dashboard.html", items = Item.get_all_items_with_user(), user = User.get_by_id(data), date = dateFormat)
+    return render_template("dashboard.html", events = Event.get_all_events_with_user(), user = User.get_by_id(data), today = date.today(),  date = dateFormat)
 
 @app.route('/logout')
 def logout():

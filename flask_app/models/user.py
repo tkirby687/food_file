@@ -23,14 +23,14 @@ class User:
     @classmethod
     def save(cls, data ):
         query = "INSERT INTO users ( first_name , last_name , email , pwd ) VALUES ( %(first_name)s , %(last_name)s , %(email)s , %(pwd)s );"
-        result  = connectToMySQL('solo_project_schema').query_db( query, data )
+        result  = connectToMySQL('group_project_schema').query_db( query, data )
         return result
     
     # Class method to Retrieve (all)
     @classmethod
     def get_all(cls):        
         query = "SELECT * FROM users;"
-        results = connectToMySQL('solo_project_schema').query_db(query)
+        results = connectToMySQL('group_project_schema').query_db(query)
         users = []        
         for user in results:
             users.append( cls(user) )
@@ -40,7 +40,7 @@ class User:
     @classmethod
     def get_by_email(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL('solo_project_schema').query_db(query, data)
+        result = connectToMySQL('group_project_schema').query_db(query, data)
         if len(result) < 1:
             return False
         return cls(result[0])
@@ -49,15 +49,20 @@ class User:
     def get_by_id(cls, data):
         
         query  = "SELECT * FROM users WHERE id = %(id)s";
-        result = connectToMySQL('solo_project_schema').query_db(query, data)
+        result = connectToMySQL('group_project_schema').query_db(query, data)
         return cls(result[0])
+    
+    @classmethod
+    def update_info(cls, form_data):
+        query = "UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, pwd=%(pwd)s  WHERE id=%(id)s;"
+        return connectToMySQL('group_project_schema').query_db(query, form_data)
     
     # Static method to validate user registration
     @staticmethod
     def user_register(user):
         is_valid = True
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL('solo_project_schema').query_db(query, user)
+        result = connectToMySQL('group_project_schema').query_db(query, user)
         if len(result) >= 1:
             flash("Email already taken.", "register")
             is_valid = False
@@ -69,7 +74,7 @@ class User:
             flash("First name must be at least 2 characters.", "register")
         if len(user["last_name"]) < 2:
             is_valid = False
-            flash("Last name must be at least 2 characters.", "register")        
+            flash("Last name must be at least 2 characters.", "register")
         if len(user["pwd"]) < 8:
             is_valid = False
             flash("Password is required and must be at least 8 characters.", "register")
